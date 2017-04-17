@@ -1,0 +1,117 @@
+body {
+  height: 720px;
+}
+
+.base {
+  width: 50%;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.common {
+  .base;
+  border-bottom: 3px solid #4588ba;
+  margin-bottom: 12px;
+  height: 12%;
+}
+
+.stomp {
+  .base;
+  border-bottom: 3px solid #4588ba;
+  margin-bottom: 10px;
+  height: 28%;
+}
+
+.stomp pre {
+  text-align: center;
+}
+
+.message {
+  .base;
+  height: 5%;
+}
+
+.output {
+  height: 45%;
+  background: #FFFFFF;
+  color: #fff;
+  font-family: "Proxima Nova", "Helvetica Neue", helvetica, arial, sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 1.5;
+  padding-top: 2rem;
+}
+
+.output .window {
+  height: 100%;
+  width: 80%;
+  margin: 0 auto 2rem;
+  box-shadow: 0 0.25rem 0.5rem #12181e;
+  border-radius: 0 0 0.1rem 0.1rem;
+}
+
+.output .body {
+  width: 100%;
+  height: 100%;
+  background: #232323;
+  padding: 18px;
+  border-radius: 0.1rem;
+  overflow: auto;
+}
+
+.output .body pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.output .body .pulse {
+  -webkit-animation: pulse 1s ease-in-out infinite;
+  -moz-animation: pulse 1s ease-in-out infinite;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@-moz-keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.output .command {
+  color: #32c146;
+}
+
+.output .comment {
+  opacity: 0.5;
+}
+
