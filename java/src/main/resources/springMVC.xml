@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 注意加载需要的schema -->
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd  
+                 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd  
+                 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd 
+                 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd 
+                 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd 
+                 http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd
+                 http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.2.xsd">
+
+	<context:component-scan base-package="me.jxy" />
+	<mvc:annotation-driven>
+		<mvc:message-converters>
+			<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+				<property name="features">
+					<array>
+						<value>WriteMapNullValue</value>
+						<value>DisableCircularReferenceDetect</value>
+						<value>WriteDateUseDateFormat</value>
+					</array>
+				</property>
+			</bean>
+		</mvc:message-converters>
+	</mvc:annotation-driven>
+	<mvc:default-servlet-handler />
+
+
+	<bean id="handlerA" class="me.jxy.websocket.handler.HandlerA" />
+	<bean id="handlerB" class="me.jxy.websocket.handler.HandlerB" />
+
+
+	<!-- 下面开始websocket相关配置 -->
+
+
+	<!-- 第一种配置，low level的消息处理，spring提供的最原始的API -->
+	<websocket:handlers allowed-origins="*">  <!-- 注意跨域 -->
+		<websocket:mapping path="/handlerA" handler="handlerA" />
+		<websocket:mapping path="/handlerB" handler="handlerB" />
+		<websocket:handshake-interceptors>
+			<!-- interceptor可以决定握手是否成功 -->
+			<bean class="me.jxy.websocket.handler.HandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+	</websocket:handlers>
+
+
+	<!-- 第二种配置，支持sockjs的版本 -->
+	<websocket:handlers allowed-origins="*">
+		<websocket:mapping path="/sockjs/handlerA" handler="handlerA" />
+		<websocket:mapping path="/sockjs/handlerB" handler="handlerB" />
+		<websocket:handshake-interceptors>
+			<bean class="me.jxy.websocket.handler.HandshakeInterceptor" />
+		</websocket:handshake-interceptors>
+		<websocket:sockjs />
+	</websocket:handlers>
+
+
+	<!-- 第三种配置，STOMP + sockjs -->
+	<!-- 在这种配置下，spring会作为一个简单的in-memory broker存在，消息可以直接发到broker，也可以经过MessageMapping方法处理后发到broker上 -->
+	<!-- spring也可以对接外部的其他broker，比如rabbitmq -->
+	<!-- 这里所有的路由策略都是基于destination的前缀， destination只是个字符串，其实没有固定格式，但spring中一般用类似路径的格式：/aa/bb -->
+	<websocket:message-broker application-destination-prefix="/app">  <!-- destination为/app*的消息会被路由到MessageMapping注解的方法上 -->
+		<websocket:stomp-endpoint path="/stomp" allowed-origins="*">
+			<websocket:sockjs />
+		</websocket:stomp-endpoint>
+		<!-- destination为/topic*、/queue*的消息会直接发到broker -->
+		<!-- 这里的topic、queue不是固定的，只是一些约定俗成的命名，topic用于广播，queue用于点对点 -->
+		<websocket:simple-broker prefix="/topic, /queue" />
+
+		<!-- 如果使用外部的broker，还可以配置地址、域名、client/server的用户名、密码 -->
+		<!-- <websocket:stomp-broker-relay prefix="/topic,/queue" /> -->
+
+		<!-- spring的文档不是很详细，很多配置项要翻dtd文件才知道 -->
+
+		<!-- 所有的channel都可以加interceptor -->
+		<websocket:client-inbound-channel>
+			<websocket:interceptors>
+				<bean class="me.jxy.websocket.channel.ChannelInterceptor"></bean>
+			</websocket:interceptors>
+		</websocket:client-inbound-channel>
+
+	</websocket:message-broker>
+
+	<!-- 配置多个message-broker不会有异常，但会有些奇怪的问题，比如消息的重复消费，所以最好只配置一个 -->
+
+</beans>

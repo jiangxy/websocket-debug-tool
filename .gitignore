@@ -13,5 +13,3 @@ npm-debug.log
 # other
 # dist/
 # !dist/*.html
-
-java/**/*.java
