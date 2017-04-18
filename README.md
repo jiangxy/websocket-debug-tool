@@ -1,4 +1,4 @@
-# websocket debug tool
+# WebSocket Debug Tool
 
 A tool to debug websocket/sockjs/stomp.
 
@@ -11,18 +11,18 @@ A tool to debug websocket/sockjs/stomp.
 
 # Quick Start
 
-Open [http://jiangxy.github.io/websocket-debug-tool](http://jiangxy.github.io/websocket-debug-tool) and use directly.
+Open [http://jiangxy.github.io/websocket-debug-tool](http://jiangxy.github.io/websocket-debug-tool) and use directly. Pay attention to Cross-Domain Policy.
 
 If you wanna modify the source code:
 
-1. node 5.3, npm 3.3+
+1. node 5.3+, npm 3.3+
 2. `git clone` and `npm install`
-3. `npm run dev` to start webpack-dev-server
+3. `npm run dev` to start webpack-dev-server (with react-hot-loader)
 4. open `http://localhost:4040`
 
 # Spring-based server
 
-There is a spring-based WebSocket server in the [java](java) folder for test. View [Doc](java/README.md).
+There is a spring-based WebSocket server in the [java](java) folder for test purpose. View [Doc](java/README.md).
 
 # Browsers support
 
