@@ -328,7 +328,7 @@ class WebSocketDebugTool extends React.PureComponent {
 
       {/*STOMP相关输入项, 注意disabled条件, 必须上面勾选STOMP后才可用*/}
       <div className="stomp">
-        <pre>available if ContentType = STOMP</pre>
+        <pre>available if Connect Type = STOMP</pre>
         <Form inline style={{ marginTop:'5px' }}>
           <FormItem label="STOMP connect header">
             <Input placeholder='json string, e.g. {"header1":"value1", "header2":"value2"}' style={{ width:'400px' }}
