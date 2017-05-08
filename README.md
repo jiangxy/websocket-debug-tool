@@ -20,9 +20,11 @@ If you wanna modify the source code:
 3. `npm run dev` to start webpack-dev-server (with react-hot-loader)
 4. open `http://localhost:4040`
 
-## Spring-based server
+## Spring-based & Netty-based server
 
 There is a spring-based WebSocket server in the [java](java) folder for test purpose. View [Doc](java/README.md).
+
+There is also a netty-based example server.
 
 ## Browsers support
 
