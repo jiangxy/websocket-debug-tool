@@ -152,6 +152,12 @@
 				<version>2.4.1</version>
 			</dependency>
 
+			<dependency>
+				<groupId>io.netty</groupId>
+				<artifactId>netty-all</artifactId>
+				<version>4.1.9.Final</version>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -260,6 +266,11 @@
 			<artifactId>jackson-core</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -315,6 +326,12 @@
 					<!-- <requestLog implementation="org.eclipse.jetty.server.NCSARequestLog"> <logDateFormat>yyyy-MM-dd HH:mm:ss</logDateFormat> 
 						<logTimeZone>GMT+8:00</logTimeZone> <logServer>true</logServer> <logCookies>true</logCookies> </requestLog> -->
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
 			</plugin>
 
 		</plugins>
