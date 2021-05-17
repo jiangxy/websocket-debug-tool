@@ -4,6 +4,11 @@ A tool to debug websocket/sockjs/stomp.
 
 ![](screenshot.png)
 
+## Docker
+
+Runs on port 4040 - so make sure to forward this somewhere
+
+
 ## Features
 
 * support WebSocket/[SockJS](https://github.com/sockjs/sockjs-client), with or without [STOMP](https://github.com/jmesnil/stomp-websocket)
