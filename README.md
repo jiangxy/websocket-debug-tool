@@ -6,7 +6,19 @@ A tool to debug websocket/sockjs/stomp.
 
 ## Docker
 
-Runs on port 4040 - so make sure to forward this somewhere
+To build a docker container run:
+
+```
+docker build -t <IMAGE_NAME> .
+```
+
+Then to run your image:
+
+```
+docker run -p 4040:4040 <IMAGE_NAME>
+```
+
+Then - open `http://localhost:4040`
 
 
 ## Features
