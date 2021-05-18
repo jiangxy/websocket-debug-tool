@@ -55,7 +55,7 @@
   "scripts": {
     "prod": "cross-env NODE_ENV=production webpack --progress --colors --config webpack.config.prod.js -p --display-error-details",
     "clean": "rimraf dist/*bundle* dist/*vendor* dist/*index*",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base dist --hot --inline --display-error-details --port 4040",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --content-base dist --hot --inline --display-error-details --port 4040 --host 0.0.0.0",
     "eslint": "eslint --ext .js,.jsx src",
     "stylelint": "stylelint \"src/**/*.css\"",
     "lesshint": "lesshint src/"

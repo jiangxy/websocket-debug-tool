@@ -4,6 +4,23 @@ A tool to debug websocket/sockjs/stomp.
 
 ![](screenshot.png)
 
+## Docker
+
+To build a docker container run:
+
+```
+docker build -t <IMAGE_NAME> .
+```
+
+Then to run your image:
+
+```
+docker run -p 4040:4040 <IMAGE_NAME>
+```
+
+Then - open `http://localhost:4040`
+
+
 ## Features
 
 * support WebSocket/[SockJS](https://github.com/sockjs/sockjs-client), with or without [STOMP](https://github.com/jmesnil/stomp-websocket)
